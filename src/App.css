@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+.home {
+  background-image: url("./assets/img/vinted.jpg");
+  background-size: cover;
+  height: 455px;
+  position: relative;
+  width: 100%;
+}
