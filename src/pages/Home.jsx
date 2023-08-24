@@ -39,8 +39,10 @@ function Home() {
             <input type="text" placeholder="Recherche des articles" />
           </div>
           <div className="login">
+            <Link to="/signup">
+              <button>S'inscrire</button>
+            </Link>
             <button>Se connecter</button>
-            <button>S'inscrire</button>
           </div>
           <div className="sale">
             <button>Vends tes articles</button>
