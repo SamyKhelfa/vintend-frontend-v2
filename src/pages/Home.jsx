@@ -1,9 +1,7 @@
 import "../App.css";
-// import du package axios
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 function Home() {
   const [data, setData] = useState();
@@ -11,12 +9,10 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const id = useParams();
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers/${id}`
+          "https://lereacteur-vinted-api.herokuapp.com/offers"
         );
-        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -56,19 +52,19 @@ function Home() {
       </div>
       <div className="offers">
         <section className="product-name">
-          {data.offers.map((offer, index) => {
-            <div key={index}>
-              <h3>{offer.product_name}</h3>
-              <p>{offer.product_price} €</p>
-              {data.product_details.map((detail, index) => {
-                console.log("hello", detail);
-                <div key={index}>
-                  <p>{detail.MARQUE}</p>
-                  <p></p>
-                </div>;
-              })}
-            </div>;
-          })}
+          {data.offers.map((offer, index) => (
+            <Link key={index} to={`/offer/${offer._id}`}>
+              <div>
+                <h3>{offer.product_name}</h3>
+                <p>{offer.product_price} €</p>
+                {offer.product_details.map((detail, detailIndex) => (
+                  <div key={detailIndex}>
+                    <p>{detail.MARQUE}</p>
+                  </div>
+                ))}
+              </div>
+            </Link>
+          ))}
         </section>
       </div>
     </div>
