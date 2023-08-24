@@ -62,6 +62,7 @@ function Home() {
                     <p>{detail.MARQUE}</p>
                   </div>
                 ))}
+                <img src={offer.product_image.secure_url} alt="product" />
               </div>
             </Link>
           ))}
