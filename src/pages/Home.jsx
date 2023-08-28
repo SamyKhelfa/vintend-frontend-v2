@@ -3,15 +3,19 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function Home() {
-  const [data, setData] = useState();
+function Home({ fetchRangeValues, search, sortPrice }) {
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
+          `https://lereacteur-vinted-api.herokuapp.com/offers?priceMin=${
+            fetchRangeValues[0]
+          }&priceMax=${fetchRangeValues[1]}&sort=${
+            sortPrice ? "price-desc" : "price-asc"
+          }&title=${search}`
         );
         setData(response.data);
         setIsLoading(false);
@@ -20,7 +24,7 @@ function Home() {
       }
     };
     fetchData();
-  }, []);
+  }, [fetchRangeValues, sortPrice, search]);
 
   return isLoading ? (
     <span>En cours de chargement...</span>
@@ -42,7 +46,9 @@ function Home() {
             <Link to="/signup">
               <button>S'inscrire</button>
             </Link>
-            <button>Se connecter</button>
+            <Link to="/signin">
+              <button>Se connecter</button>
+            </Link>
           </div>
           <div className="sale">
             <button>Vends tes articles</button>
@@ -64,7 +70,11 @@ function Home() {
                     <p>{detail.MARQUE}</p>
                   </div>
                 ))}
-                <img src={offer.product_image.secure_url} alt="product" />
+                <img
+                  src={offer.product_image.secure_url}
+                  alt="product"
+                  className="offer-image"
+                />{" "}
               </div>
             </Link>
           ))}

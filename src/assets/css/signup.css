@@ -1,0 +1,67 @@
+/* signup.css */
+.signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.signup-login-error-message {
+  color: red;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.checkbox-container {
+  margin-top: 10px;
+}
+
+.checkbox-container div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.checkbox-container span {
+  margin-left: 5px;
+}
+
+.checkbox-container p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #666;
+  margin-top: 10px;
+}
+
+.signup-form button {
+  background-color: #46b29d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.signup-form a {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  color: #46b29d;
+  text-decoration: none;
+}
