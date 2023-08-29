@@ -35,6 +35,7 @@ function Offer() {
   ) : (
     <div>
       <Link to="/">Retour</Link>
+      <Link to="/payment">Acheter</Link>
       <img src={data.product_image.secure_url} alt={data.product_name} />
       <p>{data.product_price} €</p>
       {data.product_details.map((detail, index) => {

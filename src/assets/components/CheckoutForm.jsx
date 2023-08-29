@@ -1,14 +1,11 @@
-// src/CheckoutForm.jsx
 import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-
 import axios from "axios";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ totalPrice, productName }) => {
+  const [isPaid, setIsPaid] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-
-  const [completed, setCompleted] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,29 +18,37 @@ const CheckoutForm = () => {
       name: "L'id de l'acheteur",
     });
     console.log(stripeResponse);
-    const stripeToken = stripeResponse.token.id;
-    // Une fois le token reçu depuis l'API Stripe
-    // Requête vers notre serveur
-    // On envoie le token reçu depuis l'API Stripe
-    const response = await axios.post("http://localhost:3100/pay", {
-      stripeToken,
-    });
-    console.log(response.data);
-    // Si la réponse du serveur est favorable, la transaction a eu lieu
-    if (response.data.status === "succeeded") {
-      setCompleted(true);
+
+    try {
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/payment",
+        {
+          amount: totalPrice, // Utilisez la valeur de totalPrice que vous avez
+          title: productName,
+          token: stripeResponse.token.id,
+        }
+      );
+      console.log(response.data);
+      // Si la réponse du serveur est favorable, la transaction a eu lieu
+      if (response.data) {
+        setIsPaid(true);
+      } else {
+        alert("Une erreur est survenue, veuillez réessayer.");
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
   return (
     <>
-      {!completed ? (
+      {isPaid ? (
+        <span>Paiement effectué !</span>
+      ) : (
         <form onSubmit={handleSubmit}>
           <CardElement />
           <button type="submit">Valider</button>
         </form>
-      ) : (
-        <span>Paiement effectué ! </span>
       )}
     </>
   );

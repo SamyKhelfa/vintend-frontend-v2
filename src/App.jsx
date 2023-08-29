@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./assets/components/CheckoutForm";
+import Payment from "./pages/Payment";
 
 //import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -62,9 +63,7 @@ function App() {
         <Route path="/offer/:id" element={<Offer />} />
         {/* <Route path="/payment" element={<Payment />} /> */}
         <Route path="/signin" element={<SignIn />} />
-        <Elements stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
   );
